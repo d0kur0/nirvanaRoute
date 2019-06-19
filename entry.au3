@@ -1,17 +1,31 @@
 #include "libs/consts.au3"
 #include "libs/gui.au3"
+#include "libs/findClient.au3"
 
-writeLog("Запускаю клиент игры...");
-WriteLog("Ввожу данные персонажа");
-WriteLog("Выбираю пероснажа");
+FindElementClient();
 
-WriteLog("Успешно зашли в игру...");
-WriteLog("Телепортируюсь в стартовую точку");
-WriteLog("Беру в таргет камень грёз, телепортируюсь в Зал Перерождения...");
-WriteLog("Беру в таргет НИП для входа и захожу");
+; Initial
+; Телепортация из угла к камню
+writeLog('Использую руну и телепортируюсь в ЮГД');
+Send('{F1}');
+MouseClick($MOUSE_CLICK_LEFT, 891, 383);
 
-writeLog("Успешно зашли в данж");
-WriteLog("Открываю данж");
+writeLog("Ждём прогрузку");
+Sleep(2000);
+
+writeLog("Открываем камень грёз");
+MouseClick($MOUSE_CLICK_LEFT, 1039, 320);
+
+writeLog("Ждём пока персонаж подойдёт к камню");
+Sleep(5000);
+
+writeLog("Скролю список данжей в камне до Зала Перерождения");
+MouseClick($MOUSE_CLICK_LEFT, 373, 758);
+
+WriteLog("телепортируюсь в Зал Перерождения");
+MouseClick($MOUSE_CLICK_LEFT, 161, 735);
+MouseClick($MOUSE_CLICK_LEFT, 141, 599);
+MouseClick($MOUSE_CLICK_LEFT, 141, 599);
 
 While 1
    Sleep(100);
