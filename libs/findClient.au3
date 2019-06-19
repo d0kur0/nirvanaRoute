@@ -1,11 +1,20 @@
-#cs ----------------------------------------------------------------------------
+Func FindElementClient ()
+	$elementClient = '[CLASS:ElementClient Window]';
 
- AutoIt Version: 3.3.14.5
- Author:         myName
+	While 1
+		If Not WinExists($elementClient) Then 
+			
+			writeLog('Клиент игры не запущен... Повтор проверки через 5 сек.');
+			Sleep(5000);
+			ContinueLoop;
 
- Script Function:
-	Template AutoIt script.
+		Endif;
 
-#ce ----------------------------------------------------------------------------
+		writeLog("Окно клиента найдено, ожидание попадания в фокус");
 
-; Script Start - Add your code below here
+		If WinWaitActive($elementClient) Then 
+			writeLog("Окно попало в фокус, идём дальше.");
+			ExitLoop;
+		EndIf;
+	WEnd
+EndFunc
