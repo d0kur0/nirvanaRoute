@@ -1,11 +1,18 @@
-#cs ----------------------------------------------------------------------------
+#include "libs/consts.au3"
+#include "libs/gui.au3"
 
- AutoIt Version: 3.3.14.5
- Author:         myName
+writeLog("Запускаю клиент игры...");
+WriteLog("Ввожу данные персонажа");
+WriteLog("Выбираю пероснажа");
 
- Script Function:
-	Template AutoIt script.
+WriteLog("Успешно зашли в игру...");
+WriteLog("Телепортируюсь в стартовую точку");
+WriteLog("Беру в таргет камень грёз, телепортируюсь в Зал Перерождения...");
+WriteLog("Беру в таргет НИП для входа и захожу");
 
-#ce ----------------------------------------------------------------------------
+writeLog("Успешно зашли в данж");
+WriteLog("Открываю данж");
 
-; Script Start - Add your code below here
+While 1
+   Sleep(100);
+WEnd
