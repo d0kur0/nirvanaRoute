@@ -1,11 +1,18 @@
-#cs ----------------------------------------------------------------------------
+#include <GUIConstantsEx.au3>
+#include <MsgBoxConstants.au3>
+#include "logger.au3"
 
- AutoIt Version: 3.3.14.5
- Author:         myName
+Const $wWidth  = 400;
+Const $wHeight = 600;
 
- Script Function:
-	Template AutoIt script.
+Opt("GUIOnEventMode", 1);
+GUICreate("Nirvana Route", $wWidth, $wHeight);
+GUISetOnEvent($GUI_EVENT_CLOSE, "CLOSEButton")
+GUISetState(@SW_SHOW);
 
-#ce ----------------------------------------------------------------------------
+Global $editInput = GUICtrlCreateEdit("", 15, 15, $wWidth - 30, $wHeight - 30);
+;GUICtrlSetState($editInput, $GUI_DISABLE)
 
-; Script Start - Add your code below here
+Func CLOSEButton ()
+   Exit
+EndFunc
