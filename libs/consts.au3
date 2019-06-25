@@ -1,11 +1,4 @@
-#cs ----------------------------------------------------------------------------
+Global $elementClient = '[CLASS:ElementClient Window]';
 
- AutoIt Version: 3.3.14.5
- Author:         myName
-
- Script Function:
-	Template AutoIt script.
-
-#ce ----------------------------------------------------------------------------
-
-; Script Start - Add your code below here
+Global $windowWidth   = 1366;
+Global $windowHeight  = 768;

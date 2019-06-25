@@ -1,6 +1,4 @@
 Func FindElementClient ()
-	$elementClient = '[CLASS:ElementClient Window]';
-
 	While 1
 		If Not WinExists($elementClient) Then 
 			

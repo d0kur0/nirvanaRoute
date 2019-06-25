@@ -7,8 +7,6 @@
 Const $wWidth  = 400;
 Const $wHeight = 250;
 
-Global $fExit
-
 $hWndGUI = GUICreate('NirvanaRoute', $wWidth, $wHeight, -1, -1, $WS_POPUP, BitOR($WS_EX_TRANSPARENT, $WS_EX_TOPMOST, $WS_EX_TOOLWINDOW))
 
 $aTaskbar = WinGetPos("[CLASS:Shell_TrayWnd]", "")
