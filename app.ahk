@@ -1,4 +1,7 @@
-﻿#SingleInstance Force
+﻿#include Libs\findAndActivate.ahk
+#include Libs\phys_process.ahk
+
+#SingleInstance Force
 #NoEnv
 SetWorkingDir %A_ScriptDir%
 CoordMode, Mouse, Relative
@@ -40,10 +43,8 @@ changeMag(CtrlHwnd, GuiEvent, EventInfo, ErrLevel := "") {
 }
 
 startProcess(CtrlHwnd, GuiEvent, EventInfo, ErrLevel := "") {
-	#include <findAndActivate>
-	#include <phys_process>
-	#include <mag_process>
-	#include <use_FP>
+
+	findAndActivate()
 
 	; get base config
 	GuiControlGet, bossKillTime
@@ -61,16 +62,14 @@ startProcess(CtrlHwnd, GuiEvent, EventInfo, ErrLevel := "") {
 	GuiControlGet, isFastCollect
 
 	; todo block interface
-	
-	findAndActivate ()
 
 	if (isPhys)
 	{
-		phys_process (bossKillTime, delayAfterTeleport, delayAfterInsert, delayIteration, botName, attackKey, teleportKey, collectKey, isFastCollect)
+		phys_process(bossKillTime, delayAfterTeleport*1000, delayAfterInsert*1000, delayIteration*1000, botName, attackKey, teleportKey, collectKey, isFastCollect)
 	}
 	Else
 	{
-
+		;#include modules/mag_process.ahk
 	}
 
 }
