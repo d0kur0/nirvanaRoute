@@ -1,5 +1,9 @@
 ﻿#include Libs\findAndActivate.ahk
 #include Libs\phys_process.ahk
+#include Libs\mag_process.ahk
+#include Libs\use_FP.ahk
+
+FPState = 0
 
 #SingleInstance Force
 #NoEnv
@@ -31,6 +35,9 @@ Gui Add, CheckBox, visFastCollect x328 y120 w120 h23 +Checked, Быстрый с
 Gui Add, Text, x384 y96 w193 h23 +0x200, Клавиша для сбора лута
 Gui Add, Button, vBtnOk gstartProcess x8 y288 w80 h23, Запустить
 
+Gui Add, Edit, vFPkey x328 y146 w50 h21, F8
+Gui Add, Text, x384 y146 w193 h23 +0x200, Клавиша, на которой стоит зяб
+
 Gui Show, w618 h320, NirvanaRoute
 Return
 
@@ -54,22 +61,32 @@ startProcess(CtrlHwnd, GuiEvent, EventInfo, ErrLevel := "") {
 	GuiControlGet, isPhys
 	GuiControlGet, isMag
 	GuiControlGet, botName
+	GuiControlGet, isUseFP
 
 	; get hotkeys config
 	GuiControlGet, attackKey
 	GuiControlGet, collectKey
 	GuiControlGet, teleportKey
+	GuiControlGet, FPKey
 	GuiControlGet, isFastCollect
 
 	; todo block interface
 
 	if (isPhys)
 	{
-		phys_process(bossKillTime, delayAfterTeleport*1000, delayAfterInsert*1000, delayIteration*1000, botName, attackKey, teleportKey, collectKey, isFastCollect)
+		while, 1 
+		{
+			use_FP(isUseFP, FPKey)
+			phys_process(bossKillTime, delayAfterTeleport*1000, delayAfterInsert*1000, delayIteration*1000, botName, attackKey, teleportKey, collectKey, isFastCollect)
+		}
 	}
 	Else
 	{
-		;#include modules/mag_process.ahk
+		while, 1 
+		{
+			use_FP(isUseFP, FPKey)
+			mag_process(bossKillTime, delayAfterTeleport*1000, delayAfterInsert*1000, delayIteration*1000, botName, attackKey, teleportKey, collectKey, isFastCollect)
+		}
 	}
 
 }

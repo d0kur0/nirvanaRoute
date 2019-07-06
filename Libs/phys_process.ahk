@@ -46,7 +46,7 @@ phys_process(bossKillTime, delayAfterTeleport, delayAfterInsert, delayIteration,
 
 	Loop, %bossKillTime%
 	{
-		Send, %attackKey%
+		Send, {%attackKey%}
 		Sleep, 1000
 	}
 
@@ -54,7 +54,7 @@ phys_process(bossKillTime, delayAfterTeleport, delayAfterInsert, delayIteration,
 	{
 		Loop, 3
 		{
-			Send, %collectKey%
+			Send, {%collectKey%}
 			Sleep, 500
 		}
 	}
@@ -62,7 +62,7 @@ phys_process(bossKillTime, delayAfterTeleport, delayAfterInsert, delayIteration,
 	{
 		Loop, 20
 		{
-			Send, %collectKey%
+			Send, {%collectKey%}
 			Sleep, 500
 		}
 	}
@@ -92,8 +92,8 @@ phys_process(bossKillTime, delayAfterTeleport, delayAfterInsert, delayIteration,
 	MouseClick, left, 634, 442
 
 	Sleep, 500
-	Send, %teleportKey%
+	Send, {%teleportKey%}
 	Sleep, 500
 	MouseClick, left, 801, 359
-	Sleep, %delayAfterIteration%
+	Sleep, %delayIteration%
 }
