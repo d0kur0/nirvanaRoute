@@ -2,6 +2,7 @@
 #include Libs\phys_process.ahk
 #include Libs\mag_process.ahk
 #include Libs\use_FP.ahk
+#include Libs\clear_party.ahk
 
 FPState = 0
 
@@ -71,24 +72,21 @@ startProcess(CtrlHwnd, GuiEvent, EventInfo, ErrLevel := "") {
 	GuiControlGet, isFastCollect
 
 	; todo block interface
-
-	if (isPhys)
+		
+	while, 1 
 	{
-		while, 1 
+		clear_party();
+		use_FP(isUseFP, FPKey)
+
+		if (isPhys)
 		{
-			use_FP(isUseFP, FPKey)
 			phys_process(bossKillTime, delayAfterTeleport*1000, delayAfterInsert*1000, delayIteration*1000, botName, attackKey, teleportKey, collectKey, isFastCollect)
 		}
-	}
-	Else
-	{
-		while, 1 
+		Else 
 		{
-			use_FP(isUseFP, FPKey)
 			mag_process(bossKillTime, delayAfterTeleport*1000, delayAfterInsert*1000, delayIteration*1000, botName, attackKey, teleportKey, collectKey, isFastCollect)
 		}
 	}
-
 }
 
 GuiEscape:
