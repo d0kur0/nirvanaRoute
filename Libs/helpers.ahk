@@ -10,3 +10,9 @@ getTimestamp() {
 
 	Return (31536000*(Y-1970) + (D+Floor((Y-1972)/4))*86400 + H*3600 + M*60 + S)
 }
+
+implode(sep, params*) {
+    for index,param in params
+        str .= sep . param
+    return SubStr(str, StrLen(sep)+1)
+}
