@@ -45,6 +45,7 @@ if (!isObject(profilesDB)) {
 	
 	file := FileOpen(profilesDB_file, "w")
 	file.Write(jsonString)
+	file.Close()
 	
 	Reload
 }
@@ -64,25 +65,25 @@ Gui Add, DropDownList, vprofile gchangeProfile x8 y16 w120 Choose1, % profiles
 Gui Add, Button, v_removeProfile gremoveProfile x487 y16 w120 h23, &Удалить выбранный
 Gui Add, Button, v_createProfile gcreateProfile x136 y16 w230 h23, &Сохранить настройки как новый профиль
 Gui Add, GroupBox, x8 y48 w286 h271, Основные настройки
-Gui Add, Edit, vbossKillTime x16 y80 w40 h21 +Number, % profileTemplate["bossKillTime"]
+Gui Add, Edit, vbossKillTime giChange x16 y80 w40 h21 +Number, % profileTemplate["bossKillTime"]
 Gui Add, Text, x64 y80 w198 h23 +0x200 , Сколько времени бить босса в сек.
-Gui Add, Edit, vdelayAfterTeleport x16 y112 w40 h21, % profileTemplate["delayAfterTeleport"]
+Gui Add, Edit, vdelayAfterTeleport giChange x16 y112 w40 h21, % profileTemplate["delayAfterTeleport"]
 Gui Add, Text, x64 y112 w218 h23 +0x200 , Пауза после телепорта (прогрузка) в сек.
-Gui Add, Edit, vdelayAfterInsert x16 y144 w40 h21, % profileTemplate["delayAfterInsert"]
+Gui Add, Edit, vdelayAfterInsert giChange x16 y144 w40 h21, % profileTemplate["delayAfterInsert"]
 Gui Add, Text, x64 y144 w217 h23 +0x200 , Пауза после входа в нирвану в сек.
-Gui Add, Edit, vdelayIteration x16 y176 w40 h21, % profileTemplate["delayIteration"]
+Gui Add, Edit, vdelayIteration giChange x16 y176 w40 h21, % profileTemplate["delayIteration"]
 Gui Add, Text, x64 y176 w120 h23 +0x200 , Пауза между заходами в сек.
 
 if (profileTemplate["isUseFP"]) {
-	Gui Add, CheckBox, visUseFP x16 y208 w120 h23 +Checked, Использовать ЗЯБ
+	Gui Add, CheckBox, visUseFP giChange x16 y208 w120 h23 +Checked, Использовать ЗЯБ
 } else {
-	Gui Add, CheckBox, visUseFP x16 y208 w120 h23, Использовать ЗЯБ
+	Gui Add, CheckBox, visUseFP giChange x16 y208 w120 h23, Использовать ЗЯБ
 }
 
 if (profileTemplate["isPhys"]) {
 	
-	Gui Add, Radio, visPhys gchangePhys x16 y232 w70 h23 +Checked , Физ нора
-	Gui Add, Radio, visMag gchangeMag x96 y232 w120 h23, Маг нора
+	Gui Add, Radio, visPhys giChange x16 y232 w70 h23 +Checked , Физ нора
+	Gui Add, Radio, visMag giChange x96 y232 w120 h23, Маг нора
 	
 } else {
 	
@@ -91,36 +92,99 @@ if (profileTemplate["isPhys"]) {
 
 }
 
-Gui Add, Edit, vbotName x16 y288 w170 h21,% profileTemplate["botName"]
+Gui Add, Edit, vbotName giChange x16 y288 w170 h21,% profileTemplate["botName"]
 Gui Add, Text, x16 y264 w254 h23 +0x200 , Имя бота, которому писать "123"
 Gui Add, GroupBox, x304 y48 w302 h271, Хоткеи
-Gui Add, Edit, vattackKey x312 y80 w40 h21, % profileTemplate["attackKey"]
+Gui Add, Edit, vattackKey giChange x312 y80 w40 h21, % profileTemplate["attackKey"]
 Gui Add, Text, x360 y80 w167 h23 +0x200 , Клавиша атакущего макроса
-Gui Add, Edit, vteleportKey x312 y112 w40 h21, % profileTemplate["teleportKey"]
+Gui Add, Edit, vteleportKey giChange x312 y112 w40 h21, % profileTemplate["teleportKey"]
 Gui Add, Text, x360 y112 w199 h23 +0x200 , Клавиша на которой стоит руна ТП
-Gui Add, Edit, vcollectKey x312 y144 w40 h21, % profileTemplate["collectKey"]
+Gui Add, Edit, vcollectKey giChange x312 y144 w40 h21, % profileTemplate["collectKey"]
 Gui Add, Text, x360 y144 w193 h23 +0x200 , Клавиша для сбора лута
 
 if (profileTemplate["isFastCollect"]) {
-	Gui Add, CheckBox, visFastCollect x312 y168 w120 h23 +Checked , Быстрый сбор?
+	Gui Add, CheckBox, visFastCollect giChange x312 y168 w120 h23 +Checked , Быстрый сбор?
 } else {
-	Gui Add, CheckBox, visFastCollect x312 y168 w120 h23, Быстрый сбор?
+	Gui Add, CheckBox, visFastCollect giChange x312 y168 w120 h23, Быстрый сбор?
 }
 
-Gui Add, Edit, vFPkey x312 y192 w40 h21, % profileTemplate["FPKey"]
+Gui Add, Edit, vFPkey giChange x312 y192 w40 h21, % profileTemplate["FPKey"]
 Gui Add, Text, x360 y192 w193 h23 +0x200 , Клавиша, на которой стоит зяб
 Gui Add, Button, vBtnOk gstartProcess x8 y328 w80 h23, Запустить
 
 Gui Show, w618 h360, NirvanaRoute
 Return
 
-changeProfile(CtrlHwnd, GuiEvent, EventInfo, ErrLevel := "") {
+setProfile(profile) {
 	Global profilesDB
+	values := profilesDB[profile]
+	
+	GuiControl,, bossKillTime, % values["bossKillTime"]
+	GuiControl,, delayAfterTeleport, % values["delayAfterTeleport"]
+	GuiControl,, delayAfterInsert, % values["delayAfterInsert"]
+	GuiControl,, delayIteration, % values["delayIteration"]
+	GuiControl,, isPhys, % values["isPhys"]
+	GuiControl,, isMag, % values["isMag"]
+	GuiControl,, botName, % values["botName"]
+	GuiControl,, isUseFP, % values["isUseFP"]
+	
+	GuiControl,, attackKey, % values["attackKey"]
+	GuiControl,, collectKey, % values["collectKey"]
+	GuiControl,, teleportKey, % values["teleportKey"]
+	GuiControl,, FPKey, % values["FPKey"]
+	GuiControl,, isFastCollect, % values["isFastCollect"]
+}
+
+changeProfile(CtrlHwnd, GuiEvent, EventInfo, ErrLevel := "") {
 	GuiControlGet, profile
 	
-	currentProfile := profilesDB[%profile%]
+	setProfile(profile)
+}
+
+iChange(CtrlHwnd, GuiEvent, EventInfo, ErrLevel := "") {
+	Global profilesDB
+	Global profilesDB_file
 	
-	MsgBox, %profile%
+	; get base config
+	GuiControlGet, bossKillTime
+	GuiControlGet, delayAfterTeleport
+	GuiControlGet, delayAfterInsert
+	GuiControlGet, delayIteration
+	GuiControlGet, isPhys
+	GuiControlGet, isMag
+	GuiControlGet, botName
+	GuiControlGet, isUseFP
+	GuiControlGet, profile
+
+	; get hotkeys config
+	GuiControlGet, attackKey
+	GuiControlGet, collectKey
+	GuiControlGet, teleportKey
+	GuiControlGet, FPKey
+	GuiControlGet, isFastCollect
+	
+	currentValues := {"bossKillTime": bossKillTime
+	,"delayAfterTeleport": delayAfterTeleport
+	,"delayAfterInsert": delayAfterInsert
+	,"delayIteration": delayIteration
+	,"isUseFP": isUseFP
+	,"isPhys": isPhys
+	,"isMag": isMag
+	,"botName": botName
+	,"attackKey": attackKey
+	,"teleportKey": teleportKey
+	,"collectKey": collectKey
+	,"isFastCollect": isFastCollect
+	,"FPkey": isFastCollect}
+	
+	profilesDB[profile] := currentValues
+	jsonString := Json.Stringify(profilesDB)
+	
+	MsgBox, %jsonString%
+	
+	file := FileOpen(profilesDB_file, "w")
+	file.Write(jsonString)
+	file.Close()
 }
 
 disableGui(disableStartButton = true) {
@@ -203,20 +267,13 @@ createProfile(CtrlHwnd, GuiEvent, EventInfo, ErrLevel := "") {
 	
 	file := FileOpen(profilesDB_file, "w")
 	file.Write(jsonString)
+	file.Close()
 	
 	GuiControl,, profile, % profileName
 }
 
 removeProfile(CtrlHwnd, GuiEvent, EventInfo, ErrLevel := "") {
 	MsgBox, remove
-}
-
-changePhys(CtrlHwnd, GuiEvent, EventInfo, ErrLevel := "") {
-
-}
-
-changeMag(CtrlHwnd, GuiEvent, EventInfo, ErrLevel := "") {
-
 }
 
 PostClick(x, y, hwnd) {
