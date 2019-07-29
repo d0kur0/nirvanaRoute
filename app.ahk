@@ -324,17 +324,20 @@ startProcess(CtrlHwnd, GuiEvent, EventInfo, ErrLevel := "") {
 		Reload
 	}
 	
-	find()
-	clear_party()
-	use_FP(isUseFP, FPKey)
-	
-	if (isPhys)
+	while 1 
 	{
-		phys_process(bossKillTime, delayAfterTeleport*1000, delayAfterInsert*1000, delayIteration*1000, botName, attackKey, teleportKey, collectKey, isFastCollect)
-	}
-	Else 
-	{
-		mag_process(bossKillTime, delayAfterTeleport*1000, delayAfterInsert*1000, delayIteration*1000, botName, attackKey, teleportKey, collectKey, isFastCollect)
+		find()
+		clear_party()
+		use_FP(isUseFP, FPKey)
+		
+		if (isPhys)
+		{
+			phys_process(bossKillTime, delayAfterTeleport*1000, delayAfterInsert*1000, delayIteration*1000, botName, attackKey, teleportKey, collectKey, isFastCollect)
+		}
+		Else 
+		{
+			mag_process(bossKillTime, delayAfterTeleport*1000, delayAfterInsert*1000, delayIteration*1000, botName, attackKey, teleportKey, collectKey, isFastCollect)
+		}
 	}
 }
 
