@@ -1,52 +1,53 @@
 phys_process(bossKillTime, delayAfterTeleport, delayAfterInsert, delayIteration, botName, attackKey, teleportKey, collectKey, isFastCollect)
 {
 	; teleport
-	MouseClick, left, 318, 45
+	lClick(318, 45)
 	Sleep, 3000
-	MouseClick, left, 283, 724
+	lClick(283, 724)
 	Sleep, 500
-	MouseClick, left, 60, 713
+	lClick(60, 713)
 	Sleep, 500
-	MouseClick, left, 52, 579
+	lClick(52, 579)
 	Sleep, 500
-	MouseClick, left, 52, 579
+	lClick(52, 579)
 
 	; insert
 	Sleep, %delayAfterTeleport%
-	MouseClick, left, 1317, 457
+	lClick(1317, 457)
 	Sleep, 2000
-	MouseClick, left, 1004, 222
+	lClick(1004, 222)
 	Sleep, 1500
-	MouseClick, left, 72, 675
+	lClick(72, 675)
 	Sleep, 1000
-	MouseClick, left, 72, 675
+	lClick(72, 675)
 	Sleep, %delayAfterInsert%
-	MouseClick, left, 860, 317
+	lClick(860, 317)
 	Sleep, 1000
-	MouseClick, left, 72, 675
+	lClick(72, 675)
 	Sleep, 1000
-	MouseClick, left, 72, 675
+	lClick(72, 675)
 	Sleep, 500
-	MouseClick, left, 239, 381
+	lClick(239, 381)
 	Sleep, 3000
-	MouseClick, left, 52, 434
+	lclick(52, 434)
 	Sleep, 3000
-	MouseClick, left, 52, 434
+	lclick(52, 434)
 	Sleep, 3000
-	MouseClick, left, 52, 434
+	lclick(52, 434)
 	Sleep, 3000
-	MouseClick, left, 52, 434
+	lclick(52, 434)
 	Sleep, 3000
-	MouseClick, left, 28, 413
+	lClick(28, 413)
 	Sleep, 3000
-	MouseClick, left, 28, 413
+	lClick(28, 413)
 	Sleep, 3000
 
-	Send, {TAB}
+	keydown("{TAB}")
 
 	Loop, %bossKillTime%
 	{
-		Send, {%attackKey%}
+		key = {%attackKey%}
+		keydown(key)
 		Sleep, 1000
 	}
 
@@ -54,7 +55,8 @@ phys_process(bossKillTime, delayAfterTeleport, delayAfterInsert, delayIteration,
 	{
 		Loop, 3
 		{
-			Send, {%collectKey%}
+			key = {%collectKey%}
+			keydown(key)
 			Sleep, 500
 		}
 	}
@@ -62,38 +64,40 @@ phys_process(bossKillTime, delayAfterTeleport, delayAfterInsert, delayIteration,
 	{
 		Loop, 20
 		{
-			Send, {%collectKey%}
+			key = {%collectKey%}
+			keydown(key)
 			Sleep, 500
 		}
 	}
 
-	MouseClick, left, 77, 765
+	lClick(77, 765)
 	Sleep, 200
-	MouseClick, left, 44, 767
+	lClick(44, 767)
 	Sleep, 500
-	MouseClick, left, 212, 786
+	lClick(212, 786)
 
 	Sleep, 500
-	Send, {/}
-	Send, %botName%
+	keydown("/")
+	keydown(botName)
 	Sleep, 200
-	Send, {SPACE}
+	keydown("{SPACE}")
 	Sleep, 200
-	Send, {1}
+	keydown(1)
 	Sleep, 200
-	Send, {2}
+	keydown(2)
 	Sleep, 200
-	Send, {3}
+	keydown(3)
 	Sleep, 200
-	Send, {ENTER}
+	keydown("{ENTER}")
 	Sleep, 3000
-	MouseClick, left, 690, 159
+	lClick(690, 159)
 	Sleep, 1000
-	MouseClick, left, 634, 442
+	lClick(634, 442)
 
 	Sleep, 500
-	Send, {%teleportKey%}
-	Sleep, 500
-	MouseClick, left, 801, 359
+	key = {%teleportKey%}
+	keydown(key)
+	Sleep, 600
+	lClick(801, 359)
 	Sleep, %delayIteration%
 }
