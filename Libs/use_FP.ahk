@@ -13,6 +13,7 @@ use_FP(isUseFP, FPKey)
 }
 
 use_FP_process(FPKey) {
-	Send, {%FPKey%}
+	key = {%FPKey%}
+	keydown(key)
 	Sleep, 5000
 }
