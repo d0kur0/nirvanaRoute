@@ -16,3 +16,15 @@ implode(sep, params*) {
         str .= sep . param
     return SubStr(str, StrLen(sep)+1)
 }
+
+keydown(key) {
+	ControlSend, , %key%, ahk_class ElementClient Window
+}
+
+lClick(x, y) {
+	ControlClick, x%x% y%y%, ahk_class ElementClient Window, , Left, 1, NA
+}
+
+rClick(x, y) {
+	ControlClick, x%x% y%y%, ahk_class ElementClient Window, , Right, 1, NA
+}
