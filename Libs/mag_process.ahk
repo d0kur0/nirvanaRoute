@@ -1,68 +1,70 @@
 mag_process(bossKillTime, delayAfterTeleport, delayAfterInsert, delayIteration, botName, attackKey, teleportKey, collectKey, isFastCollect)
 {
 	; teleport
-	MouseClick, left, 318, 45
+	lClick(318, 45)
 	Sleep, 3000
-	MouseClick, left, 283, 724
+	lClick(283, 724)
 	Sleep, 500
-	MouseClick, left, 60, 713
+	lClick(60, 713)
 	Sleep, 500
-	MouseClick, left, 52, 579
+	lClick(52, 579)
 	Sleep, 500
-	MouseClick, left, 52, 579
+	lClick(52, 579)
 
 	; insert
 	Sleep, %delayAfterTeleport%
-	MouseClick, left, 1317, 457
+	lClick(1317, 457)
 	Sleep, 2000
-	MouseClick, left, 1004, 222
+	lClick(1004, 222)
 	Sleep, 1500
-	MouseClick, left, 72, 675
+	lClick(72, 675)
 	Sleep, 1000
-	MouseClick, left, 72, 675
+	lClick(72, 675)
 	Sleep, %delayAfterInsert%
 
 	; open mag
-	MouseClick, left, 824, 126
+	lClick(824, 126)
 	Sleep, 3000
-	MouseClick, left, 72, 675
+	lClick(72, 675)
 	Sleep, 1000
-	MouseClick, left, 72, 675
+	lClick(72, 675)
 	Sleep, 1000
 
-	MouseClick, left, 34, 558
+	lClick(34, 558)
 	Sleep, 3000
-	MouseClick, left, 29, 449
+	lClick(29, 449)
 	Sleep, 3000
-	MouseClick, left, 24, 473
+	lClick(24, 473)
 	Sleep, 3000
-	MouseClick, left, 21, 438
+	lClick(21, 438)
 	Sleep, 3000
-	MouseClick, left, 17, 381
+	lClick(17, 381)
 	Sleep, 3000
-	MouseClick, left, 23, 458
+	lClick(23, 458)
 	Sleep, 3000
-	MouseClick, left, 26, 389
+	lClick(26, 389)
 	Sleep, 3000
 
-	Send, {TAB}
+	keydown("{TAB}")
 
 	Loop, %bossKillTime%
 	{
-		Send, {%attackKey%}
+		key = {%attackKey%}
+		keydown(key)
 		Sleep, 1000
 	}
 
 	; FIND ITEMS
-	Send, {F12}
+	keydown("{F12}")
 	Sleep, 3000
-	Send, {F12}
+	keydown("{F12}")
 
 	if (isFastCollect)
 	{
 		Loop, 3
 		{
-			Send, {%collectKey%}
+			key = {%collectKey%}
+			keydown(key)
 			Sleep, 600
 		}
 	}
@@ -70,20 +72,22 @@ mag_process(bossKillTime, delayAfterTeleport, delayAfterInsert, delayIteration, 
 	{
 		Loop, 30
 		{
-			Send, {%collectKey%}
+			key = {%collectKey%}
+			keydown(key)
 			Sleep, 500
 		}
 	}
 
-	Send, {F12}
+	keydown("{F12}")
 	Sleep, 2000
-	Send, {F12}
+	keydown("{F12}")
 
 	if (isFastCollect)
 	{
 		Loop, 3
 		{
-			Send, {%collectKey%}
+			key = {%collectKey%}
+			keydown(key)
 			Sleep, 600
 		}
 	}
@@ -91,38 +95,40 @@ mag_process(bossKillTime, delayAfterTeleport, delayAfterInsert, delayIteration, 
 	{
 		Loop, 30
 		{
-			Send, {%collectKey%}
+			key = {%collectKey%}
+			keydown(key)
 			Sleep, 500
 		}
 	}
 
-	MouseClick, left, 77, 765
+	lClick(77, 765)
 	Sleep, 200
-	MouseClick, left, 44, 767
+	lClick(44, 767)
 	Sleep, 500
-	MouseClick, left, 212, 786
+	lClick(212, 786)
 
 	Sleep, 500
-	Send, {/}
-	Send, %botName%
+	keydown("{/}")
+	keydown(botName)
 	Sleep, 200
-	Send, {SPACE}
+	keydown("{SPACE}")
 	Sleep, 200
-	Send, {1}
+	keydown(1)
 	Sleep, 200
-	Send, {2}
+	keydown(2)
 	Sleep, 200
-	Send, {3}
+	keydown(3)
 	Sleep, 200
-	Send, {ENTER}
+	keydown("{ENTER}")
 	Sleep, 3000
-	MouseClick, left, 690, 159
+	lClick(690, 159)
 	Sleep, 1000
-	MouseClick, left, 634, 442
+	lClick(634, 442)
 
 	Sleep, 500
-	Send, {%teleportKey%}
+	key = {%teleportKey%}
+	keydown(key)
 	Sleep, 500
-	MouseClick, left, 801, 359
+	lClick(801, 359)
 	Sleep, %delayIteration%
 }
